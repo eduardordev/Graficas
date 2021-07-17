@@ -96,12 +96,12 @@ rend.glClear()
 
 rend.glColor(0,0,0)
 
-rend.glPoint(300,200,color(255,255,255))
-rend.glPoint(300,205,color(255,255,255))
-rend.glPoint(300,210,color(255,255,255))
-rend.glPoint(300,215,color(255,255,255))
-rend.glPoint(300,220,color(255,255,255))
-rend.glPoint(300,225,color(255,255,255))
+rend.glPoint(512,384,color(255,255,255))
+rend.glPoint(512,389,color(255,255,255))
+rend.glPoint(512,379,color(255,255,255))
+rend.glPoint(512,394,color(255,255,255))
+rend.glPoint(512,374,color(255,255,255))
+rend.glPoint(512,399,color(255,255,255))
 rend.glViewport(100, 100, 400, 400)
 
 rend.glFinish("point.bmp")
