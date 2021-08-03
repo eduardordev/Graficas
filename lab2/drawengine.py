@@ -56,8 +56,38 @@ class Renderer(object):
     def glColor(self, r, g, b):
         self.current_color = color(r,g,b)
 
-    def glPoint(self,x,y,color=None):
-        self.framebuffer[y][x]  = color or self.current_color
+    #def glPoint(self,x,y,color=None):
+     #   self.framebuffer[y][x]  = color or self.current_color
+
+    def line(x0, y0, x1, y1):
+        dy = abs(y1 - y0)
+        dx = abs(x1 - x0)
+
+        steep = dy > dx
+
+        if steep:
+            x0, y0 = y0, x0
+            x1, y1 = y1, x1
+
+            dy = abs(y1 - y0)
+            dx = abs(x1 - x0)
+
+        offset = 0 * 2 * dx
+        threshold = 0.5 * 2 * dx
+        y = y0
+
+        # y = mx + b
+        points = []
+        for x in range(x0, x1):
+            if steep:
+                points.append((y, x))
+            else:
+                points.append((x, y))
+
+            offset += (dy/dx) * 2 * dx
+            if offset >= threshold:
+                y += 1 if y0 < y1 else -1
+                threshold += 1 * 2 * dx
 
     def glFinish(self, filename):
         with open(filename, "bw") as f:
@@ -94,14 +124,10 @@ rend = Renderer(width, height)
 rend.glClearColor(255,255,255)
 rend.glClear()
 
+rend.line(150, 100, 250)
 rend.glColor(0,0,0)
 
-rend.glPoint(512,384,color(255,255,255))
-rend.glPoint(512,389,color(255,255,255))
-rend.glPoint(512,379,color(255,255,255))
-rend.glPoint(512,394,color(255,255,255))
-rend.glPoint(512,374,color(255,255,255))
-rend.glPoint(512,399,color(255,255,255))
+
 rend.glViewport(100, 100, 400, 400)
 
-rend.glFinish("point.bmp")
+rend.glFinish("line.bmp")
