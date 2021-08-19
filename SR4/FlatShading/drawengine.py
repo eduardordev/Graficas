@@ -1,38 +1,6 @@
 import struct
-import random
-import numpy
 from obj import *
-from collections import *
 
-V2 = namedtuple('Point2', ['x', 'y'])
-V3 = namedtuple('Point3', ['x', 'y', 'z'])
-
-def bbox(A,B,C):
-  xs = [A.x, B.x, C.x]
-  xs.sort()
-  ys = [A.y, B.y, C.y]
-  ys.sort()
-  return xs[0],xs[-1],  ys[0], ys[-1]
-
-def cross(v0, v1):
-
-  cx= v0.y*v1.z - v0.z*v1.y
-  cy= v0.z*v1.x - v0.x*v1.z
-  cz= v0.x*v1.y - v0.y*v1.x
-  return cx, cy, cz
-
-def barycentric(A,B,C,P):
-  
-  cx, cy, cz = cross(
-    V3(B.x-A.x, C.x-A.x, A.x-P.x),
-    V3(B.y-A.y, C.y-A.y, A.y-P.y)
-  )
-
-  u = cx/cz
-  v= cy/cz
-  w = 1-(u+v) 
-
-  return w,v,u
 
 def char(c):
     return struct.pack('=c', c.encode('ascii'))
@@ -57,7 +25,6 @@ class Renderer(object):
     self.width = width
     self.height = height
     self.current_color = WHITE
-    
     self.glCreateWindow()
 
   def glCreateWindow(self):
@@ -65,12 +32,6 @@ class Renderer(object):
       [BLACK for x in range(self.width)] 
       for y in range(self.height)
     ]
-
-    self.zbuffer =[
-      [-99999 for x in range(
-        self.width)]
-        for y in range(self.height)]
-
 
   def glFinish(self, filename):
     f = open(filename, 'bw')
@@ -147,24 +108,7 @@ class Renderer(object):
         if offset >= threshold:
             y += 1 if y1 < y2 else -1
             threshold += dx * 2
-
-  def triangle(self, A,B,C, color=None):
-    xmin, xmax, ymin, ymax = bbox(A,B,C)
-
-    for x in range(xmin, xmax +1):
-      for y in range(ymin, ymax +1):
-        P= V2(x,y)
-        w, v, u = barycentric(A, B, C, P)
-        if w > 0 and v > 0 and u > 0:
-          continue
-
-        z= A.z*w+B.z*v+C.z*u
-        
-        if z > self.zbuffer[x][y]:
-          self.point(x,y, color)
-          self.zbuffer[x][y] = z
-
-
+    
   def load(self, filename, translate, scale):
     model = Obj(filename)
     
