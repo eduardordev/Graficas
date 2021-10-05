@@ -46,13 +46,13 @@ r.lookAt(V3(0, 0, 5), V3(0, 0, 0), V3(0, 1, 0))
     
 r.current_texture = None
 r.light = V3(0.3, 0.3, 0.4)
-r.load('./models/dragonite.obj', (0, 0.2, 0), (0.2, 0.5, 0.2), (0, 0, 0))
+r.load('./models/dragonite.obj', (0.5, 0.2, 0), (0.08, 0.2, 0.05), (0, -pi/4, 0))
 r.active_shader = simple_shading
 r.draw_arrays('TRIANGLES')
 
 r.current_texture = None
 r.light = V3(0.3, 0.3, 0.4)
-r.load('./models/tv.obj', (0, -0.8, 0), (0.5, 1, 0.5), (0, 0, 0))
+r.load('./models/tv.obj', (0.5, -0.4, 0), (0.25, 0.6, 0.1), (0, -pi/4, 0))
 r.active_shader = simple_shadingtv
 r.draw_arrays('TRIANGLES')
 
