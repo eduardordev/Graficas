@@ -20,12 +20,12 @@ class Obj(object):
         for linea in self.lineas:
             if linea:
                 try:
-                    prefix, val = linea.split('', 1)
+                    prefix, val = linea.split(' ', 1)
                 except:
                     prefix =''
                 if prefix =='v':
                     
-                    vert = list(map(float, val.split('')))
+                    vert = list(map(float, val.split(' ')))
                     self.verts.append(vert)
 
                     if vert[0]>maximo_x:
@@ -39,13 +39,18 @@ class Obj(object):
 
                 elif prefix =='vt':
                     self.tverts.append(
-                        list(map(float, val.split('')))
+                        list(map(float, val.split(' ')))
                     )
+                elif prefix == 'vn':
+                    self.normales.append(
+                        list(map(float, val.split(' ')))
+                  )
                 elif prefix == 'f':
                     self.faces.append(
-                        [list(map(int, face.split('/'))) for face in val.split('')]
+                        [list(map(int, face.split('/'))) for face in val.split(' ')]
                     )
-        self.vertexN = [[self.vert[i][0]/maximo_x, self.vert[i][1]/maximo_y, self.vert[i][2]/maximo_z]for i in self.verts]
+        self.vertexN = [[i[0]/maximo_x, i[1]/maximo_y, i[2]/maximo_z]for i in self.verts]
+        self.verts = self.vertexN
 
 class Texture(object):
     def __init__(self, path):

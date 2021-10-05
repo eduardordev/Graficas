@@ -59,7 +59,7 @@ class Renderer(object):
         f.close()
         
     def render(self):
-        self.write('boomFlower.bmp')
+        self.write('render.bmp')
         
     def point(self, x, y, color = None):
         self.framebuffer[y][x] = color or self.currentColor
@@ -129,12 +129,12 @@ class Renderer(object):
         
         for face in model.faces:
             for v in range(len(face)):
-                vertex = self.transform(model.vertices[face[v][0] - 1])
+                vertex = self.transform(model.verts[face[v][0] - 1])
                 vertex_buffer_object.append(vertex)
                 
             if self.current_texture:
                 for v in range(len(face)):
-                    tvertex = V3(*model.tvertices[face[v][1] - 1])
+                    tvertex = V3(*model.tverts[face[v][1] - 1])
                     vertex_buffer_object.append(tvertex)
                     
             for v in range(len(face)):
@@ -158,12 +158,10 @@ class Renderer(object):
     
     def triangle(self):
         
-        
         A = next(self.active_vertex_array)
         B = next(self.active_vertex_array)
         C = next(self.active_vertex_array)
            
-        
 
         if self.current_texture:
             tA = next(self.active_vertex_array)
