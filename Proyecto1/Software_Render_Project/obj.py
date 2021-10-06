@@ -46,9 +46,24 @@ class Obj(object):
                         list(map(float, val.split(' ')))
                   )
                 elif prefix == 'f':
-                    self.faces.append(
-                        [list(map(int, face.split('/'))) for face in val.split(' ')]
-                    )
+                    faces = val.split(' ')
+                    if(len(faces)==3):
+
+                        self.faces.append(
+                            [list(map(int, face.split('/'))) for face in faces if len(face)>2]
+                        )
+                    else:
+                        faces1 = [faces[0], faces[1], faces[2]]
+                        faces2 = [faces[0], faces[2], faces[3]]
+
+                        self.faces.append(
+                            [list(map(int, face.split('/'))) for face in faces1 if len(face)>2]
+                        )
+
+                        self.faces.append(
+                            [list(map(int, face.split('/'))) for face in faces2 if len(face)>2]
+                        )
+
         self.vertexN = [[i[0]/maximo_x, i[1]/maximo_y, i[2]/maximo_z]for i in self.verts]
         self.verts = self.vertexN
 
