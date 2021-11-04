@@ -1,5 +1,4 @@
 import pygame
-import random
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
@@ -103,12 +102,12 @@ screen = pygame.display.set_mode((500, 500))
 r = Life(screen)
 
 r.pixel(25,64, WHITE)
-r.pixel(26,65, WHITE)
-r.pixel(24,63, WHITE)
+r.pixel(25,65, WHITE)
+r.pixel(25,63, WHITE)
 
-r.pixel(50,120, WHITE)
-r.pixel(51,121, WHITE)
-r.pixel(49,119, WHITE)
+r.pixel(24,65, WHITE)
+r.pixel(25,65, WHITE)
+r.pixel(23,65, WHITE)
 
 r.pixel(135,150, WHITE)
 r.pixel(136,151, WHITE)
@@ -116,10 +115,7 @@ r.pixel(134,149, WHITE)
 
 
 while True:
-  
   r.copy()
   r.clear()
   r.render()
-  
-
   pygame.display.flip()
