@@ -212,8 +212,97 @@ r.pixel(84,32,WHITE)
 r.pixel(83,31,WHITE)
 r.pixel(84,30,WHITE)
 
+#cubo loco
+
+r.pixel(165, 115,WHITE)
+r.pixel(166,115,WHITE)
+r.pixel(167,115,WHITE)
+
+r.pixel(164,116,WHITE)
+r.pixel(163,115,WHITE)
+
+r.pixel(164,114,WHITE)
+r.pixel(164,113,WHITE)
+r.pixel(164,112,WHITE)
+
+r.pixel(163,111,WHITE)
+r.pixel(164,110,WHITE)
 
 
+#adn loco
+
+r.pixel(45,142, WHITE)
+r.pixel(45,143, WHITE)
+r.pixel(46,143, WHITE)
+
+r.pixel(45,150, WHITE)
+r.pixel(46,150, WHITE)
+r.pixel(45,151, WHITE)
+
+r.pixel(47,144, WHITE)
+r.pixel(47,145, WHITE)
+r.pixel(48,145, WHITE)
+
+r.pixel(47,148, WHITE)
+r.pixel(48,148, WHITE)
+r.pixel(47,149, WHITE)
+
+r.pixel(49,146, WHITE)
+r.pixel(49,147, WHITE)
+r.pixel(50,146, WHITE)
+r.pixel(50,147, WHITE)
+
+r.pixel(51,144, WHITE)
+r.pixel(51,145, WHITE)
+r.pixel(52,144, WHITE)
+r.pixel(52,145, WHITE)
+
+r.pixel(51,148, WHITE)
+r.pixel(51,149, WHITE)
+r.pixel(52,148, WHITE)
+r.pixel(52,149, WHITE)
+
+r.pixel(53,143, WHITE)
+r.pixel(54,143, WHITE)
+
+r.pixel(53,146, WHITE)
+r.pixel(53,147, WHITE)
+r.pixel(54,146, WHITE)
+r.pixel(54,147, WHITE)
+
+r.pixel(53,150, WHITE)
+r.pixel(54,150, WHITE)
+
+r.pixel(55,144, WHITE)
+r.pixel(55,145, WHITE)
+r.pixel(56,144, WHITE)
+r.pixel(56,145, WHITE)
+
+r.pixel(55,148, WHITE)
+r.pixel(55,149, WHITE)
+r.pixel(56,148, WHITE)
+r.pixel(56,149, WHITE)
+
+r.pixel(57,146, WHITE)
+r.pixel(57,147, WHITE)
+r.pixel(58,146, WHITE)
+r.pixel(58,147, WHITE)
+
+r.pixel(60,144, WHITE)
+r.pixel(59,145, WHITE)
+r.pixel(60,145, WHITE)
+
+r.pixel(59,148, WHITE)
+r.pixel(60,148, WHITE)
+r.pixel(60,149, WHITE)
+
+r.pixel(62,142, WHITE)
+r.pixel(61,143, WHITE)
+r.pixel(62,143, WHITE)
+
+r.pixel(61,150, WHITE)
+r.pixel(62,150, WHITE)
+r.pixel(62,151, WHITE)
 
 
 
