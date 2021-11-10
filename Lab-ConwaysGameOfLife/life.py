@@ -1,3 +1,4 @@
+import random
 import pygame
 
 BLACK = (0,0,0)
@@ -5,6 +6,7 @@ WHITE = (255,255,255)
 
 isAlive = 255
 isDead = 0
+
 
 class Life(object):
     def __init__(self, screen):
@@ -19,6 +21,8 @@ class Life(object):
 
     def copy(self):
         self.prev_gen = self.screen.copy()
+        
+
 
     def render(self):
         for px_x in range(self.width):
@@ -100,11 +104,20 @@ class Life(object):
                     self.pixel(px_x, px_y, WHITE)
 
 
-
 pygame.init()
 screen = pygame.display.set_mode((200, 200))
 
 r = Life(screen)
+
+pixels = random.randint(1,10000)
+
+for i in range(pixels):
+    
+    px = random.randint(1,200)
+    py = random.randint(1,200)
+
+    print(px,py)
+    r.pixel(px,py,WHITE)
 
 #Lineas simples
 
