@@ -14,7 +14,7 @@ r.scene.append(Cube(V3(-2, 0.75, -9.25), 0.5, rubber))
 '''
 
 r.scene = [
-    Cube(V3(0, 0, -1), 2, wood),
+    Cube(V3(-0.5, 0.75, -9.25), 0.5, wood),
 
 ]
 
