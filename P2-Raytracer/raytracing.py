@@ -123,7 +123,7 @@ class Raytracer(object):
         ar = (self.width/self.height)
         for y in range(self.height):
             for x in range(self.width):
-                if random()> 0.3:
+                if random()> 0:
                     
                     i= 2 * ((x + 0.5) / self.width) - 1 * ar * tan(fov/2)
                     j= 1-2 * ((y + 0.5) / self.height) * tan(fov/2)
