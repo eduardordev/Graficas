@@ -3,6 +3,7 @@ from func import *
 import numpy as np
 from render import *
 
+executing = True
 
 def render(rotateX, rotateY, rotateZ, actualShader,scaleC,translatex,translatey,translatez):
     i = glm.mat4(1)
@@ -24,9 +25,7 @@ def render(rotateX, rotateY, rotateZ, actualShader,scaleC,translatex,translatey,
         glm.value_ptr(theMatrix)
     )
 
-#gl glViewport 
 glViewport(0, 0, WIDTH, HEIGHT)
-
 
 rotateX = 0
 rotateY = 0
@@ -56,7 +55,7 @@ print('''
       Press f to change shaders
       ''')
 
-executing = True
+
 while executing:
     glUseProgram(active_shader)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -74,50 +73,72 @@ while executing:
     clock.tick(15)
 
     for action in pygame.event.get():
+
         if action.type == pygame.QUIT:
             running = False
+
         if action.type == pygame.KEYDOWN:
+
             if action.key == pygame.K_z:
                 rotateZ += 0.1
+
             elif action.key == pygame.K_x:
                 rotateZ -= 0.1
+
             elif action.key == pygame.K_w:
                 rotateY += 0.1
+
             elif action.key == pygame.K_s:
                 rotateY -= 0.1
+
             elif action.key == pygame.K_d:
                 rotateX += 0.1
+
             elif action.key == pygame.K_a:
                 rotateX -= 0.1
+
             elif action.key == pygame.K_c:
                 scaleC += 1
+
             elif action.key == pygame.K_v:
                 scaleC -= 1
+
                 if scaleC == 0:
                     scaleC = 1
+
             elif action.key == pygame.K_UP:
                 translatey += 1
+
                 if translatey >= 13:
                     translatey = 12
+
             elif action.key == pygame.K_DOWN:
                 translatey -= 1
+
                 if translatey <= -13:
                     translatey = -12
+
             elif action.key == pygame.K_RIGHT:
                 translatex += 1
+
                 if translatex >= 24:
                     translatex = 23
+
             elif action.key == pygame.K_LEFT:
                 translatex -= 1
+
                 if translatex <= -24:
                     translatex = -23
                     
             elif action.key == pygame.K_k:
                 translatez += 1
+
                 if translatez >= 24:
                     translatez = 23
+
             elif action.key == pygame.K_l:
                 translatez -= 1
+
                 if translatez <= -24:
                     translatez = -23
                 
@@ -125,7 +146,9 @@ while executing:
                 #glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
                 if active_shader == shader:
                     active_shader = shader2
+
                 elif active_shader == shader2:
                     active_shader = shader3
+                    
                 elif active_shader == shader3:
                     active_shader = shader
