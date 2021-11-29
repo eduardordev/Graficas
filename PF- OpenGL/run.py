@@ -1,154 +1,7 @@
 from math import sin
-import pygame
-from func import load_vertices,rotationMatrix
+from func import *
 import numpy as np
-from obj import *
-from OpenGL.GL import *
-from OpenGL.GL.shaders import compileProgram, compileShader
-import glm
-
-
-HEIGHT = 720
-WIDTH = 1200
-ASPECT_RATIO = WIDTH/HEIGHT
-pygame.init()
-screen = pygame.display.set_mode((1200, 720), pygame.OPENGL | pygame.DOUBLEBUF)
-glClearColor(0.1, 0.2, 0.5, 1.0)
-glEnable(GL_DEPTH_TEST)
-clock = pygame.time.Clock()
-
-
-vertex_shader = """
-#version 460
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec3 ccolor;
-uniform mat4 theMatrix;
-out vec3 mycolor;
-void main() 
-{
-  gl_Position = theMatrix * vec4(position.x, position.y, position.z, 1);
-  mycolor = ccolor;
-}
-"""
-
-fragment_shader = """
-#version 460
-layout(location = 0) out vec4 fragColor;
-uniform int clock;
-in vec3 mycolor;
-void main()
-{
-    if (mod(clock/10, 2) == 0) {
-    fragColor = vec4(mycolor.xyz, 1.0f);
-} else {
-    fragColor = vec4(mycolor.zxy, 1.0f);
-    }
-}
-"""
-
-cvs = compileShader(vertex_shader, GL_VERTEX_SHADER)
-cfs = compileShader(fragment_shader, GL_FRAGMENT_SHADER)
-
-shader = compileProgram(cvs, cfs)
-
-
-
-#segundo shaders
-vertex_shader2 = """
-#version 460
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec3 ccolor;
-uniform mat4 theMatrix;
-out vec3 mycolor;
-void main() 
-{
-  gl_Position = theMatrix * vec4(position.x, position.y, position.z, 1);
-  mycolor = ccolor;
-}
-"""
-
-fragment_shader2 = """
-#version 460
-layout(location = 0) out vec4 fragColor;
-uniform int clock;
-in vec3 mycolor;
-void main()
-{
-    fragColor = vec4(mycolor.x,0.5f, 1.0f,1.0f);
-}
-"""
-
-cvs2 = compileShader(vertex_shader2, GL_VERTEX_SHADER)
-cfs2 = compileShader(fragment_shader2, GL_FRAGMENT_SHADER)
-
-shader2 = compileProgram(cvs2, cfs2)
-
-#tercer shaders
-vertex_shader3 = """
-#version 460
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec3 ccolor;
-uniform mat4 theMatrix;
-out vec3 mycolor;
-void main() 
-{
-  gl_Position = theMatrix * vec4(position.x, position.y, position.z, 1);
-  mycolor = ccolor;
-}
-"""
-
-fragment_shader3 = """
-#version 460
-layout(location = 0) out vec4 fragColor;
-uniform int clock;
-in vec3 mycolor;
-void main()
-{
-    fragColor = vec4(0.7f ,0.7f ,mycolor.x,1.0f);
-}
-"""
-
-cvs3 = compileShader(vertex_shader3, GL_VERTEX_SHADER)
-cfs3 = compileShader(fragment_shader3, GL_FRAGMENT_SHADER)
-
-shader3 = compileProgram(cvs3, cfs3)
-
-mesh = Obj('./boomFlower.obj')
-
-
-vertex_data, index_data = load_vertices(mesh)
-
-
-vertex_buffer_object = glGenBuffers(1)
-glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_object)
-glBufferData(GL_ARRAY_BUFFER, vertex_data.nbytes, vertex_data, GL_STATIC_DRAW)
-
-vertex_array_object = glGenVertexArrays(1)
-glBindVertexArray(vertex_array_object)
-glVertexAttribPointer(
-    0,  # location
-    3,  # size
-    GL_FLOAT,  # tipo
-    GL_FALSE,  # normalizados
-    4 * 9,  # stride
-    ctypes.c_void_p(0)
-)
-glEnableVertexAttribArray(0)
-
-element_buffer_object = glGenBuffers(1)
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_object)
-glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_data.nbytes,
-             index_data, GL_STATIC_DRAW)
-
-glVertexAttribPointer(
-    1,  # location
-    3,  # size
-    GL_FLOAT,  # tipo
-    GL_FALSE,  # normalizados
-    4 * 9,  # stride
-    ctypes.c_void_p(4 * 3)
-)
-glEnableVertexAttribArray(1)
+from render import *
 
 
 def render(rotateX, rotateY, rotateZ, actualShader,scaleC,translatex,translatey,translatez):
@@ -186,8 +39,11 @@ a = 0
 active_shader = shader
 
 print('''
-      Press e to scale up
-      Press r to scale down
+    
+    CONTROLES:
+
+      Press c to scale up
+      Press v to scale down
       Press z to rote z up
       Press x to rote z down
       Press w to rote y up
@@ -199,8 +55,9 @@ print('''
       Press l to move in negative z
       Press f to change shaders
       ''')
-running = True
-while running:
+
+executing = True
+while executing:
     glUseProgram(active_shader)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -216,55 +73,55 @@ while running:
     pygame.display.flip()
     clock.tick(15)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for action in pygame.event.get():
+        if action.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_z:
+        if action.type == pygame.KEYDOWN:
+            if action.key == pygame.K_z:
                 rotateZ += 0.1
-            elif event.key == pygame.K_x:
+            elif action.key == pygame.K_x:
                 rotateZ -= 0.1
-            elif event.key == pygame.K_w:
+            elif action.key == pygame.K_w:
                 rotateY += 0.1
-            elif event.key == pygame.K_s:
+            elif action.key == pygame.K_s:
                 rotateY -= 0.1
-            elif event.key == pygame.K_d:
+            elif action.key == pygame.K_d:
                 rotateX += 0.1
-            elif event.key == pygame.K_a:
+            elif action.key == pygame.K_a:
                 rotateX -= 0.1
-            elif event.key == pygame.K_e:
+            elif action.key == pygame.K_c:
                 scaleC += 1
-            elif event.key == pygame.K_r:
+            elif action.key == pygame.K_v:
                 scaleC -= 1
                 if scaleC == 0:
                     scaleC = 1
-            elif event.key == pygame.K_UP:
+            elif action.key == pygame.K_UP:
                 translatey += 1
                 if translatey >= 13:
                     translatey = 12
-            elif event.key == pygame.K_DOWN:
+            elif action.key == pygame.K_DOWN:
                 translatey -= 1
                 if translatey <= -13:
                     translatey = -12
-            elif event.key == pygame.K_RIGHT:
+            elif action.key == pygame.K_RIGHT:
                 translatex += 1
                 if translatex >= 24:
                     translatex = 23
-            elif event.key == pygame.K_LEFT:
+            elif action.key == pygame.K_LEFT:
                 translatex -= 1
                 if translatex <= -24:
                     translatex = -23
                     
-            elif event.key == pygame.K_k:
+            elif action.key == pygame.K_k:
                 translatez += 1
                 if translatez >= 24:
                     translatez = 23
-            elif event.key == pygame.K_l:
+            elif action.key == pygame.K_l:
                 translatez -= 1
                 if translatez <= -24:
                     translatez = -23
                 
-            elif event.key == pygame.K_f:
+            elif action.key == pygame.K_f:
                 #glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
                 if active_shader == shader:
                     active_shader = shader2

@@ -6,23 +6,23 @@ from math import sin, cos
 V2 = namedtuple('Point2', ['x', 'y'])
 V3 = namedtuple('Point3', ['x', 'y', 'z'])
 
-def load_vertices(model):
-    vertices_objeto = []
+def load_vortex(model):
+    vortex_obj = []
     for face in model.faces:
         for v in range(len(face)):
             vertex = model.vertices[face[v][0] - 1]
-            vertices_objeto.extend(vertex)
+            vortex_obj.extend(vertex)
             tvertex = model.tvertices[face[v][1] - 1]
-            vertices_objeto.extend(tvertex)
+            vortex_obj.extend(tvertex)
             normal = model.normales[face[v][2] - 1]
-            vertices_objeto.extend(normal)
+            vortex_obj.extend(normal)
     
     
-    vertices_objeto = np.array(vertices_objeto, dtype = np.float32)
+    vortex_obj = np.array(vortex_obj, dtype = np.float32)
 
     index_data = np.array([[vertex[0] - 1 for vertex in face] for face in model.faces], dtype=np.uint32).flatten()
-    #retrun lista con vertices mejoradas
-    return vertices_objeto,index_data
+    
+    return vortex_obj,index_data
 
 def rotationMatrix(point):
     rotate = V3(*point)
