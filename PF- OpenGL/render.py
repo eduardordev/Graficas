@@ -13,7 +13,7 @@ ASPECT_RATIO = WIDTH/HEIGHT
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.OPENGL | pygame.DOUBLEBUF)
 
-glClearColor(0.1, 0.2, 0.5, 1.0)
+glClearColor(0.1, 0.2, 0.8, 1.0)
 glEnable(GL_DEPTH_TEST)
 clock = pygame.time.Clock()
 
@@ -71,7 +71,7 @@ uniform int clock;
 in vec3 mycolor;
 void main()
 {
-    fragColor = vec4(mycolor.x,0.5f, 1.0f,1.0f);
+    fragColor = vec4(mycolor.x,0.5f, 1.8f,1.0f);
 }
 """
 
@@ -100,7 +100,7 @@ uniform int clock;
 in vec3 mycolor;
 void main()
 {
-    fragColor = vec4(0.7f ,0.7f ,mycolor.x,1.0f);
+    fragColor = vec4(0.7f ,0.9f ,mycolor.x,1.0f);
 }
 """
 

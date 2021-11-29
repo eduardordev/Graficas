@@ -30,7 +30,7 @@ glViewport(0, 0, WIDTH, HEIGHT)
 rotateX = 0
 rotateY = 0
 rotateZ = 0
-scaleC = 1
+scaleC = 2
 translatex = 0
 translatey = 0
 translatez = 0
